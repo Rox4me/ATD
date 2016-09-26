@@ -12,6 +12,7 @@ public class Tower1 {
 	public Tower1(){
 		
 	}
+	//Shooting troops in range
 	public void shootTroop(){
 		
 	}
