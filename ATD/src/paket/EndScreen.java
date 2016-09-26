@@ -13,17 +13,29 @@ public class EndScreen extends BasicGameState{
 	Image lossScreen;
 	Image winScreen;
 	StateBasedGame game;
+	boolean playerWin;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-//		lossScreen = new Image("LossScreen.png");
-//		winScreen = new Image("WinScreen.png");
+		lossScreen = new Image("textures/LossScreen.png");
+		winScreen = new Image("textures/WinScreen.png");
 		this.game = game;
+		
+		if(Enemy.getHealth() <= 0){
+			playerWin = true;
+		}else{
+			playerWin = false;
+		}
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		
+		g.drawImage(winScreen, 0, 0);
+		if(playerWin == true){
+			g.drawImage(winScreen, 0, 0);
+		}else{
+			g.drawImage(lossScreen, 0, 0);
+		}
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package paket;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -27,9 +28,8 @@ public class Test extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		this.game.enterState(1);
-		
 		test1 = new Rectangle(x,x,10,10);
-	
+
 		x++;
 		if(x > 799){
 			x = 0;
