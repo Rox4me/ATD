@@ -14,7 +14,7 @@ public class Test extends BasicGameState {
 	StateBasedGame game;
 
 	Image[] troopImages = new Image[4];
-	Image test;
+	Image background;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -24,13 +24,13 @@ public class Test extends BasicGameState {
 		Troops.createTroop();
 		Tower.createTower();
 		//load temp background
-		test  = new Image("textures/WinScreen.png");
+		background  = new Image("textures/map.png");
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		//draw background
-		g.drawImage(test, 0,0);
+		g.drawImage(background, 0,0);
 		//draw troop if its health is above 0
 		if(Troops.troops[0].getHealth() > 0){
 			g.drawImage(troopImages[Troops.troops[0].troopImage], Troops.troops[0].positionX, Troops.troops[0].positionY);
