@@ -11,11 +11,13 @@ import org.newdawn.slick.state.StateBasedGame;
 public class EndScreen extends BasicGameState{
 
 	Image lossScreen;
+	Image winScreen;
 	StateBasedGame game;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		lossScreen = new Image("LossScreen.png");
+//		lossScreen = new Image("LossScreen.png");
+//		winScreen = new Image("WinScreen.png");
 		this.game = game;
 	}
 
