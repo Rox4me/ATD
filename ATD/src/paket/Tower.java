@@ -8,8 +8,8 @@ public class Tower {
 	//DaMaGe
 	private int DMG=1;
 	//coordinates
-	private int x;
-	private int y;
+	public int x;
+	public int y;
 	
 	//used by intersect to determine if the tower can hit a troop
 	Circle range;
@@ -23,7 +23,7 @@ public class Tower {
 	//Shooting troops in range
 	public void shootTroop(Troop T, int i){
 		//reduce troop health
-		T.setHealth(T.getHealth() - 1);
+		T.setHealth(T.getHealth() - DMG);
 		//debug message, what troop was shot
 		System.out.println("Shot troop: " + i);
 		//if troop runs out of health
