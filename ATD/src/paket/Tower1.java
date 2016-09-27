@@ -19,9 +19,12 @@ public class Tower1 {
 		range = new Circle(this.x, this.y, 100);
 	}
 	//Shooting troops in range
-	public void shootTroop(Troop T){
+	public void shootTroop(Troop T, int i){
 		//reduce troop health
 		T.setHealth(T.getHealth() - 1);
+		if(T.getHealth()<=0){
+			Tower.killtroop(i);
+		}
 		
 		
 	}

@@ -15,11 +15,11 @@ public class Tower {
 			Nturrets++;
 		}
 	}
-/*
-	public void shoot(){
-		for(int i=0;i>=Nturrets;i++){
-			turrets[i].shootTroop();
+	public static void killtroop(int i){
+		for(;i<Troops.NTroops;i++){
+			Troops.troops[i]=Troops.troops[i+1];
 		}
+		Troops.NTroops--;
 	}
-	*/
+
 }
