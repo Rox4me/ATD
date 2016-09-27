@@ -31,8 +31,8 @@ public class Test extends BasicGameState {
 		Troops.createTroop();
 		Troops.troops[3].tempMove(120, 120);
 		
-		Tower.createTower(150, 150);
-		Tower.createTower(200, 200);
+		Towers.createTower(150, 150);
+		Towers.createTower(200, 200);
 		//load temp background
 		background  = new Image("textures/map.png");
 	}
@@ -45,8 +45,8 @@ public class Test extends BasicGameState {
 		for(int i=0;i<Troops.NTroops;i++){
 			g.drawImage(troopImages[Troops.troops[i].troopImage], Troops.troops[i].positionX, Troops.troops[i].positionY);
 		}
-		for(int i=0;i<Tower.Nturrets;i++){
-			g.draw(Tower.turrets[i].range);
+		for(int i=0;i<Towers.Nturrets;i++){
+			g.draw(Towers.turrets[i].range);
 		}
 		
 		//draw tower range
@@ -59,14 +59,14 @@ public class Test extends BasicGameState {
 		}
 		//	this.game.enterState(1);
 		//if troop 0 is within range of tower1 0
-		for(int i=0;i<Tower.Nturrets;i++){
+		for(int i=0;i<Towers.Nturrets;i++){
 			for(int ii=0; ii<Troops.NTroops;ii++){
 				//debug message, what tower and troop is being checked
 				//if troop is within range of a tower.
-				if(Troops.troops[ii].hitBox.intersects(Tower.turrets[i].range) ){
+				if(Troops.troops[ii].hitBox.intersects(Towers.turrets[i].range) ){
 					//debug message, tower shooting troop
 					System.out.print("Hitbox check 1: " + i+": Hitbox check 2: "+ii + "  | ");
-					Tower.turrets[i].shootTroop(Troops.troops[ii], ii);
+					Towers.turrets[i].shootTroop(Troops.troops[ii], ii);
 					//check no more troops, jump to next tower
 					ii = Troops.NTroops;
 

@@ -1,28 +1,38 @@
 package paket;
 
+import org.newdawn.slick.geom.Circle;
+
 public class Tower {
-	private static int maxTurrets=50;
-	public static int Nturrets=0;
-	//array of all towers on the map
-	public static Tower1[] turrets= new Tower1[50] ;
+	//Rate Of Fire
+	private int ROF=1;
+	//DaMaGe
+	private int DMG=1;
+	//coordinates
+	private int x;
+	private int y;
 	
-	public static void createTower(int x, int y){
-		//only create turrets if the max limit has not been reached
-		if(Nturrets>=maxTurrets){}
-		else{
-			//create new turret
-			turrets[Nturrets]= new Tower1(x, y);
-			Nturrets++;
-		}
+	//used by intersect to determine if the tower can hit a troop
+	Circle range;
+	
+	public Tower(int x, int y){
+		//create range "hitbox"
+		this.x=x;
+		this.y=y;
+		range = new Circle(this.x, this.y, 100);
 	}
-	//remove troop from the game
-	public static void killtroop(int i){
-		for(;i<Troops.NTroops;i++){
-			//move troops in array to fill the empty slot left by the dying troop
-			Troops.troops[i]=Troops.troops[i+1];
+	//Shooting troops in range
+	public void shootTroop(Troop T, int i){
+		//reduce troop health
+		T.setHealth(T.getHealth() - 1);
+		//debug message, what troop was shot
+		System.out.println("Shot troop: " + i);
+		//if troop runs out of health
+		if(T.getHealth()<=0){
+			//remove troop from the game
+			Towers.killtroop(i);
 		}
-		//reduce ammount of troops on the map
-		Troops.NTroops--;
+		
+		
 	}
 
 }
