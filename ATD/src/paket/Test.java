@@ -5,8 +5,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -16,12 +14,19 @@ public class Test extends BasicGameState {
 
 	Image[] troopImages = new Image[4];
 	Image background;
+	Image towerBase;
+	Image towerTurret;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		this.game = game;
 		//create tower and troop
-		troopImages[0] = new Image("textures/Troop1.png");
+		troopImages[0] = new Image("textures/bandvagn.png");
+		background  = new Image("textures/map.png");
+		towerBase = new Image("textures/enemybottom.png");
+		towerTurret = new Image("textures/enemytop.png");
+		
+		
 		Troops.createTroop();
 
 		Troops.createTroop();
@@ -33,8 +38,6 @@ public class Test extends BasicGameState {
 		
 		Towers.createTower(150, 150);
 		Towers.createTower(200, 200);
-		//load temp background
-		background  = new Image("textures/map.png");
 	}
 
 	@Override
@@ -44,8 +47,11 @@ public class Test extends BasicGameState {
 		//draw troops
 		for(int i=0;i<Troops.NTroops;i++){
 			g.drawImage(troopImages[Troops.troops[i].troopImage], Troops.troops[i].positionX, Troops.troops[i].positionY);
+			g.draw(Troops.troops[i].hitBox);
 		}
 		for(int i=0;i<Towers.Nturrets;i++){
+			g.drawImage(towerBase, Towers.turrets[i].x-20, Towers.turrets[i].y-20);
+			g.drawImage(towerTurret, Towers.turrets[i].x-15, Towers.turrets[i].y-15);
 			g.draw(Towers.turrets[i].range);
 		}
 		
