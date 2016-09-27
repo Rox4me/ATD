@@ -3,12 +3,12 @@ package paket;
 import org.newdawn.slick.geom.Rectangle;
 
 public class Troop {
-	
+		
 	private int health;
 	private int speed;
 	//position is not specified in the constructor as it should be specified by the map
-	int positionX = 130;
-	int positionY = 100;
+	int positionX = 0;
+	int positionY = 0;
 	//gamestate saves an array of images for troops, this is used to select the image for this troop
 	int troopImage = 0;
 	
@@ -21,7 +21,8 @@ public class Troop {
 		this.speed = speed;
 		this.troopImage = troopImage;
 		//create hitbox
-		hitBox = new Rectangle(this.positionX, this.positionY, 20, 20);
+		hitBox = new Rectangle(positionX, positionY, 20, 20);
+		System.out.println(hitBox);
 	}
 
 	public int getHealth() {
@@ -41,9 +42,21 @@ public class Troop {
 	}
 	
 	public void move(Path path){
-		
+	}
+
+	public void tempMove(int x, int y){
+		//move troop hitbox
+		hitBox.setLocation(x, y);
+		this.positionX = x;
+		this.positionY = y;
 	}
 	
+	//change where the troops will spawn
+	//proboably wont work
+	public void setSpawnPoint(int x, int y){
+		this.positionX = x;
+		this.positionY = y;
+	}
 	
 
 }

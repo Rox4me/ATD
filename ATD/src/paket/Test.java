@@ -3,6 +3,7 @@ package paket;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
@@ -22,7 +23,16 @@ public class Test extends BasicGameState {
 		//create tower and troop
 		troopImages[0] = new Image("textures/Troop1.png");
 		Troops.createTroop();
-		Tower.createTower();
+
+		Troops.createTroop();
+		Troops.troops[1].tempMove(150, 150);
+		Troops.createTroop();
+		Troops.troops[2].tempMove(100, 100);
+		Troops.createTroop();
+		Troops.troops[3].tempMove(120, 120);
+		
+		Tower.createTower(150, 150);
+		Tower.createTower(200, 200);
 		//load temp background
 		background  = new Image("textures/map.png");
 	}
@@ -38,21 +48,31 @@ public class Test extends BasicGameState {
 		for(int i=0;i<Tower.Nturrets;i++){
 			g.draw(Tower.turrets[i].range);
 		}
+		
 		//draw tower range
 	}
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-	//	this.game.enterState(1);
+		if(container.getInput().isKeyDown(Input.KEY_ESCAPE)){
+			container.exit();
+		}
+		//	this.game.enterState(1);
 		//if troop 0 is within range of tower1 0
 		for(int i=0;i<Tower.Nturrets;i++){
-			System.out.println("hej");
 			for(int ii=0; ii<Troops.NTroops;ii++){
-				System.out.println(i+":"+ii);
-				if(Troops.troops[ii].hitBox.intersects(Tower.turrets[i].range) && Troops.troops[ii].getHealth() > 0){
-					System.out.println("pew pew");
-					//tower1 0 shoots troop 0
+				//debug message, what tower and troop is being checked
+				//if troop is within range of a tower.
+				if(Troops.troops[ii].hitBox.intersects(Tower.turrets[i].range) ){
+					//debug message, tower shooting troop
+					System.out.print("Hitbox check 1: " + i+": Hitbox check 2: "+ii + "  | ");
 					Tower.turrets[i].shootTroop(Troops.troops[ii], ii);
+					//check no more troops, jump to next tower
+					ii = Troops.NTroops;
+
+				}else{
+					//debug message, tower not shooting troop
+					System.out.println("Hitbox check 1: " + i+": Hitbox check 2: "+ii + "  | false");
 				}
 			}
 			
