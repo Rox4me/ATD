@@ -18,6 +18,8 @@ public class Tower {
 		//create range "hitbox"
 		this.x=x;
 		this.y=y;
+		this.DMG=DMG;
+		this.ROF=ROF;
 		range = new Circle(this.x, this.y, 100);
 	}
 	//Shooting troops in range
