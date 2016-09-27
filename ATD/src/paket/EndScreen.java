@@ -36,6 +36,7 @@ public class EndScreen extends BasicGameState{
 		}else{
 			g.drawImage(lossScreen, 0, 0);
 		}
+		
 	}
 
 	@Override
