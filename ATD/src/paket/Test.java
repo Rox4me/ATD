@@ -75,12 +75,21 @@ public class Test extends BasicGameState {
 			}else if(Troops.troops[i].positionX < 0){
 				Enemy.health--;
 				Towers.killtroop(i);
+				if(Enemy.health <=0){
+					this.game.enterState(1);
+				}
 			}else if(Troops.troops[i].positionY > 800){
 				Enemy.health--;
 				Towers.killtroop(i);
+				if(Enemy.health <=0){
+					this.game.enterState(1);
+				}
 			}else if(Troops.troops[i].positionY < 0){
 				Enemy.health--;
 				Towers.killtroop(i);
+				if(Enemy.health <=0){
+					this.game.enterState(1);
+				}
 			}
 		}
 		//	this.game.enterState(1);
