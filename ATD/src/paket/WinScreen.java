@@ -9,35 +9,21 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 //screen displayed when the game is over, ie when the player has won or lost
-public class EndScreen extends BasicGameState{
+public class WinScreen extends BasicGameState{
 
-	Image lossScreen;
 	Image winScreen;
 	StateBasedGame game;
-	boolean playerWin;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		lossScreen = new Image("textures/gameover.png");
 		winScreen = new Image("textures/winner.png");
 		this.game = game;
 		
-		if(Enemy.getHealth() <= 0){
-			playerWin = true;
-		}else{
-			playerWin = false;
-		}
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		g.drawImage(winScreen, 0, 0);
-		if(playerWin == true){
-			g.drawImage(winScreen, 0, 0);
-		}else{
-			g.drawImage(lossScreen, 0, 0);
-		}
-		
+		g.drawImage(winScreen, 0, 0);		
 	}
 
 	@Override
