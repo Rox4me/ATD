@@ -6,6 +6,7 @@ public class Troop {
 		
 	private int health;
 	private int speed;
+	private int whichWay=1;
 	//position is not specified in the constructor as it should be specified by the map
 	int positionX = 0;
 	int positionY = 0;
@@ -33,15 +34,24 @@ public class Troop {
 		this.health = health;
 	}
 
-	public int getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(int speed) {
-		this.speed = speed;
-	}
-	
-	public void move(Path path){
+	public void move(){
+		if(whichWay==1){
+			this.positionX = positionX+speed;
+			//move troop hitbox
+			hitBox.setLocation(positionX, positionY);
+		}else if(whichWay==2){
+			this.positionY = positionY-speed;
+			//move troop hitbox
+			hitBox.setLocation(positionX, positionY);
+		}else if(whichWay==3){
+			this.positionX = positionX-speed;
+			//move troop hitbox
+			hitBox.setLocation(positionX, positionY);
+		}else if(whichWay==4){
+			this.positionY = positionY+speed;
+			//move troop hitbox
+			hitBox.setLocation(positionX, positionY);
+		}
 	}
 
 	public void tempMove(int x, int y){

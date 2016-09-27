@@ -60,8 +60,28 @@ public class Test extends BasicGameState {
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+		System.out.println(Enemy.health);
 		if(container.getInput().isKeyDown(Input.KEY_ESCAPE)){
 			container.exit();
+		}
+		for(int i=0; i<Troops.NTroops;i++){
+			Troops.troops[i].move();
+			if(Troops.troops[i].positionX > 800){
+				Enemy.health--;
+				Towers.killtroop(i);
+				if(Enemy.health <=0){
+					this.game.enterState(1);
+				}
+			}else if(Troops.troops[i].positionX < 0){
+				Enemy.health--;
+				Towers.killtroop(i);
+			}else if(Troops.troops[i].positionY > 800){
+				Enemy.health--;
+				Towers.killtroop(i);
+			}else if(Troops.troops[i].positionY < 0){
+				Enemy.health--;
+				Towers.killtroop(i);
+			}
 		}
 		//	this.game.enterState(1);
 		//if troop 0 is within range of tower1 0
@@ -71,14 +91,14 @@ public class Test extends BasicGameState {
 				//if troop is within range of a tower.
 				if(Troops.troops[ii].hitBox.intersects(Towers.turrets[i].range) ){
 					//debug message, tower shooting troop
-					System.out.print("Hitbox check 1: " + i+": Hitbox check 2: "+ii + "  | ");
+//					System.out.print("Hitbox check 1: " + i+": Hitbox check 2: "+ii + "  | ");
 					Towers.turrets[i].shootTroop(Troops.troops[ii], ii);
 					//check no more troops, jump to next tower
 					ii = Troops.NTroops;
 
 				}else{
 					//debug message, tower not shooting troop
-					System.out.println("Hitbox check 1: " + i+": Hitbox check 2: "+ii + "  | false");
+//					System.out.println("Hitbox check 1: " + i+": Hitbox check 2: "+ii + "  | false");
 				}
 			}
 			
