@@ -6,12 +6,12 @@ public class Towers {
 	//array of all towers on the map
 	public static Tower[] turrets= new Tower[50] ;
 	
-	public static void createTower(int x, int y){
+	public static void createTower(int x, int y, int DMG, int ROF){
 		//only create turrets if the max limit has not been reached
 		if(Nturrets>=maxTurrets){}
 		else{
 			//create new turret
-			turrets[Nturrets]= new Tower(x, y);
+			turrets[Nturrets]= new Tower(x, y, DMG, ROF);
 			Nturrets++;
 		}
 	}

@@ -4,9 +4,9 @@ import org.newdawn.slick.geom.Circle;
 
 public class Tower {
 	//Rate Of Fire
-	private int ROF=1;
+	private int ROF;
 	//DaMaGe
-	private int DMG=1;
+	private int DMG;
 	//coordinates
 	public int x;
 	public int y;
@@ -14,7 +14,7 @@ public class Tower {
 	//used by intersect to determine if the tower can hit a troop
 	Circle range;
 	
-	public Tower(int x, int y){
+	public Tower(int x, int y, int DMG, int ROF){
 		//create range "hitbox"
 		this.x=x;
 		this.y=y;

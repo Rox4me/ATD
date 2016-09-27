@@ -36,8 +36,8 @@ public class Test extends BasicGameState {
 		Troops.createTroop();
 		Troops.troops[3].tempMove(120, 120);
 		
-		Towers.createTower(150, 150);
-		Towers.createTower(200, 200);
+		Towers.createTower(150, 150, 1, 1);
+		Towers.createTower(200, 200, 1, 1);
 	}
 
 	@Override
