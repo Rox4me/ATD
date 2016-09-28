@@ -32,8 +32,7 @@ public class Tower {
 			//reduce troop health
 			T.setHealth(T.getHealth() - DMG);
 			//debug message, what troop was shot
-			System.out.println("Shot troop: " + i + " Remaining health: " +Troops.troops[i].getHealth());
-			System.out.println();
+//			System.out.println("Shot troop: " + i + " Remaining health: " +Troops.troops[i].getHealth());
 			//if troop runs out of health
 			if(T.getHealth()<=0){
 				//remove troop from the game
@@ -43,7 +42,7 @@ public class Tower {
 			lastShot=System.nanoTime();
 			
 		}else{
-			System.out.println("Not ready to fire yet");
+//			System.out.println("Not ready to fire yet");
 			
 		}
 		

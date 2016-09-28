@@ -32,6 +32,12 @@ public class WinScreen extends BasicGameState{
 		if(container.getInput().isKeyDown(Input.KEY_ESCAPE)){
 			container.exit();
 		}
+		if(container.getInput().isKeyDown(Input.KEY_R)){
+			Troops.NTroops = 0;
+			Towers.Nturrets = 0;
+			this.game.enterState(0);
+		}
+
 
 	}
 

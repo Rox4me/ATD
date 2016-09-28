@@ -25,16 +25,16 @@ public class Test extends BasicGameState {
 		background  = new Image("textures/map.png");
 		towerBase = new Image("textures/enemybottom.png");
 		towerTurret = new Image("textures/enemytop.png");
+		Troops.NTroops = 0;
+		Towers.Nturrets = 0;
+		Player.credit = 10000;
 		
 		Troop.setSpawnPoint(0,350);
 		
-		Troops.createTroop();
-		Troops.createTroop();
-		Troops.createTroop();
-		Troops.createTroop();
-		
 		Towers.createTower(100, 300, 1, 1);
 		Towers.createTower(400, 300, 1, 1);
+	
+		
 	}
 
 	@Override
@@ -73,8 +73,6 @@ public class Test extends BasicGameState {
 		}
 		
 		if(container.getInput().isKeyDown(Input.KEY_R)){
-			Troops.NTroops = 0;
-			Towers.Nturrets = 0;
 			container.reinit();
 		}
 /*		if(container.getInput().isKeyDown(Input.KEY_R)){
@@ -90,34 +88,52 @@ public class Test extends BasicGameState {
 		}
 	*/	
 		
-		System.out.println(Enemy.health);
+//		System.out.println(Enemy.health);
+		//killing troops and checking if the enemy is dead (player has won)
 		for(int i=0; i<Troops.NTroops;i++){
 			Troops.troops[i].move();
+			//if troop is out of map
 			if(Troops.troops[i].positionX > 800){
 				Enemy.health--;
+				//remove troop from game
 				Towers.killtroop(i);
 				if(Enemy.health <=0){
+					//enter victory screen
 					this.game.enterState(1);
 				}
+			//if troop is out of map
 			}else if(Troops.troops[i].positionX < 0){
 				Enemy.health--;
+				//remove troop from game
 				Towers.killtroop(i);
 				if(Enemy.health <=0){
+					//enter victory screen
 					this.game.enterState(1);
 				}
+			//if troop is out of map
 			}else if(Troops.troops[i].positionY > 800){
 				Enemy.health--;
+				//remove troop from game
 				Towers.killtroop(i);
 				if(Enemy.health <=0){
+					//enter victory screen
 					this.game.enterState(1);
 				}
+ 			//if troop is out of map
 			}else if(Troops.troops[i].positionY < 0){
 				Enemy.health--;
+				//remove troop from game
 				Towers.killtroop(i);
 				if(Enemy.health <=0){
+					//enter victory screen
 					this.game.enterState(1);
 				}
 			}
+		}
+		//check if player has no credits and no troops (player has lost)
+		if(Player.credit <= 0 && Troops.NTroops == 0){
+			//enter loss screen
+			this.game.enterState(2);
 		}
 		//	this.game.enterState(1);
 		//if troop 0 is within range of tower1 0

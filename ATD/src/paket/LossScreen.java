@@ -31,6 +31,9 @@ public class LossScreen extends BasicGameState {
 		if(container.getInput().isKeyDown(Input.KEY_ESCAPE)){
 			container.exit();
 		}
+		if(container.getInput().isKeyDown(Input.KEY_R)){
+			this.game.enterState(0);
+		}
 
 	}
 

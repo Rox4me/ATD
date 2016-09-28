@@ -8,12 +8,14 @@ public class Troops {
 	
 	public static void createTroop(){
 		//only create troops if the player has not yet hit the troop limit
-		if(NTroops>=maxTroops){}
-		else{
+		if(!(NTroops>=maxTroops) && (Player.credit - 50) >= 0){
 			//create troop
-			troops[NTroops]= new Troop(100, 10,0);
+			troops[NTroops]= new Troop(100, 10,0, 100);
 			NTroops++;
+			Player.purchaseTroops(50);
+			System.out.println("Player credits: " + Player.credit);
 		}
+	
 	}
 		
 }
