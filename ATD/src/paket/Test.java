@@ -22,6 +22,8 @@ public class Test extends BasicGameState {
 		this.game = game;
 		//create tower and troop
 		troopImages[0] = new Image("textures/bandvagn.png");
+		troopImages[1] = new Image("textures/bandvagn.png");
+		troopImages[1].rotate(90);
 		background  = new Image("textures/map.png");
 		towerBase = new Image("textures/enemybottom.png");
 		towerTurret = new Image("textures/enemytop.png");
@@ -43,8 +45,14 @@ public class Test extends BasicGameState {
 		g.drawImage(background, 0,0);
 		//draw troops
 		for(int i=0;i<Troops.NTroops;i++){
-			g.drawImage(troopImages[Troops.troops[i].troopImage], Troops.troops[i].positionX, Troops.troops[i].positionY);
-			g.draw(Troops.troops[i].hitBox);
+			if(Troops.troops[i].positionX > 200){
+				g.drawImage(troopImages[Troops.troops[i].troopImage+1], Troops.troops[i].positionX, Troops.troops[i].positionY);
+				
+			}else{
+				g.drawImage(troopImages[Troops.troops[i].troopImage], Troops.troops[i].positionX, Troops.troops[i].positionY);
+				
+			}
+//			g.draw(Troops.troops[i].hitBox);
 		}
 		for(int i=0;i<Towers.Nturrets;i++){
 			g.drawImage(towerBase, Towers.turrets[i].x-20, Towers.turrets[i].y-20);
