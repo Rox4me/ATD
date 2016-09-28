@@ -7,9 +7,13 @@ public class Troop {
 	private int health;
 	private int speed;
 	private int whichWay=1;
+	private long lastMove;
 	//position is not specified in the constructor as it should be specified by the map
 	int positionX = 0;
 	int positionY = 0;
+	
+	static int spawnX = 0;
+	static int spawnY = 0;
 	//gamestate saves an array of images for troops, this is used to select the image for this troop
 	int troopImage = 0;
 	
@@ -18,12 +22,16 @@ public class Troop {
 
 	//constructor
 	public Troop(int health, int speed, int troopImage){
+		lastMove=System.nanoTime();
 		this.health = health;
-		this.speed = speed;
+		this.speed = speed*1000000;
 		this.troopImage = troopImage;
 		//create hitbox
-		hitBox = new Rectangle(positionX, positionY, 20, 20);
+		hitBox = new Rectangle(positionX, positionY, 79, 41);
 		System.out.println(hitBox);
+		this.positionX = spawnX;
+		this.positionY = spawnY;
+		hitBox.setLocation(spawnX, spawnY);
 	}
 
 	public int getHealth() {
@@ -35,37 +43,38 @@ public class Troop {
 	}
 
 	public void move(){
-		if(whichWay==1){
-			this.positionX = positionX+speed;
-			//move troop hitbox
-			hitBox.setLocation(positionX, positionY);
-		}else if(whichWay==2){
-			this.positionY = positionY-speed;
-			//move troop hitbox
-			hitBox.setLocation(positionX, positionY);
-		}else if(whichWay==3){
-			this.positionX = positionX-speed;
-			//move troop hitbox
-			hitBox.setLocation(positionX, positionY);
-		}else if(whichWay==4){
-			this.positionY = positionY+speed;
-			//move troop hitbox
-			hitBox.setLocation(positionX, positionY);
+//		System.out.println("MOVE");
+		if(speed<System.nanoTime()-lastMove){
+//			System.out.println("MOVED");
+			if(whichWay==1){
+				System.out.println(positionX);
+				this.positionX++;
+				System.out.println(positionX);
+				//move troop hitbox
+				hitBox.setLocation(positionX, positionY);
+			}else if(whichWay==2){
+				this.positionY--;
+				//move troop hitbox
+				hitBox.setLocation(positionX, positionY);
+			}else if(whichWay==3){
+				this.positionX--;
+				//move troop hitbox
+				hitBox.setLocation(positionX, positionY);
+			}else if(whichWay==4){
+				this.positionY++;
+				//move troop hitbox
+				hitBox.setLocation(positionX, positionY);
+			}
+			
+			lastMove=System.nanoTime();
 		}
 	}
 
-	public void tempMove(int x, int y){
-		//move troop hitbox
-		hitBox.setLocation(x, y);
-		this.positionX = x;
-		this.positionY = y;
-	}
 	
 	//change where the troops will spawn
-	//proboably wont work
-	public void setSpawnPoint(int x, int y){
-		this.positionX = x;
-		this.positionY = y;
+	public static void setSpawnPoint(int x, int y){
+		spawnX = x;
+		spawnY = y;
 	}
 	
 

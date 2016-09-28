@@ -26,18 +26,15 @@ public class Test extends BasicGameState {
 		towerBase = new Image("textures/enemybottom.png");
 		towerTurret = new Image("textures/enemytop.png");
 		
+		Troop.setSpawnPoint(0,350);
 		
 		Troops.createTroop();
-
 		Troops.createTroop();
-		Troops.troops[1].tempMove(150, 150);
 		Troops.createTroop();
-		Troops.troops[2].tempMove(100, 100);
 		Troops.createTroop();
-		Troops.troops[3].tempMove(120, 120);
 		
-		Towers.createTower(150, 150, 1, 1);
-		Towers.createTower(200, 200, 1, 1);
+		Towers.createTower(100, 300, 1, 1);
+		Towers.createTower(400, 300, 1, 1);
 	}
 
 	@Override
@@ -58,12 +55,42 @@ public class Test extends BasicGameState {
 		//draw tower range
 	}
 
+	int spawnDelay = 0;
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		System.out.println(Enemy.health);
+		//exit game
 		if(container.getInput().isKeyDown(Input.KEY_ESCAPE)){
 			container.exit();
 		}
+		//spawnKey
+		if(spawnDelay == 30){
+			if(container.getInput().isKeyDown(Input.KEY_S) && Troops.NTroops < 50){
+				Troops.createTroop();
+				spawnDelay = 0;
+			}
+		}else{
+			spawnDelay++;
+		}
+		
+		if(container.getInput().isKeyDown(Input.KEY_R)){
+			Troops.NTroops = 0;
+			Towers.Nturrets = 0;
+			container.reinit();
+		}
+/*		if(container.getInput().isKeyDown(Input.KEY_R)){
+			container.reinit();
+			for(int i = 0; i < Troops.NTroops; i++){
+				Troops.troops[i] = null;				
+			}
+			Troops.NTroops = 0;
+			for(int i = 0; i < Towers.Nturrets; i++){
+				Towers.turrets[i] = null;
+			}
+				Towers.Nturrets = 0;
+		}
+	*/	
+		
+		System.out.println(Enemy.health);
 		for(int i=0; i<Troops.NTroops;i++){
 			Troops.troops[i].move();
 			if(Troops.troops[i].positionX > 800){
