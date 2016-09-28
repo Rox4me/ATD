@@ -32,6 +32,7 @@ public class Start extends StateBasedGame {
 	public void initStatesList(GameContainer container) throws SlickException {
 		this.addState(new Test());
 		this.addState(new WinScreen());
+		this.addState(new LossScreen());
 		
 		
 	}

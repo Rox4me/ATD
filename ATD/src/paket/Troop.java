@@ -21,14 +21,13 @@ public class Troop {
 	Rectangle hitBox;
 
 	//constructor
-	public Troop(int health, int speed, int troopImage){
+	public Troop(int health, int speed, int troopImage, int cost){
 		lastMove=System.nanoTime();
 		this.health = health;
 		this.speed = speed*1000000;
 		this.troopImage = troopImage;
 		//create hitbox
 		hitBox = new Rectangle(positionX, positionY, 79, 41);
-		System.out.println(hitBox);
 		this.positionX = spawnX;
 		this.positionY = spawnY;
 		hitBox.setLocation(spawnX, spawnY);
@@ -47,9 +46,9 @@ public class Troop {
 		if(speed<System.nanoTime()-lastMove){
 //			System.out.println("MOVED");
 			if(whichWay==1){
-				System.out.println(positionX);
+//				System.out.println(positionX);
 				this.positionX++;
-				System.out.println(positionX);
+//				System.out.println(positionX);
 				//move troop hitbox
 				hitBox.setLocation(positionX, positionY);
 			}else if(whichWay==2){

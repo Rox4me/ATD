@@ -2,17 +2,17 @@ package paket;
 
 public class Player{
 	
-	int credit;
-	
-	public Player(int credit){
-		this.credit = credit;
+	static int credit = 1000000;
+		
+	public static void purchaseTroops(int cost){
+		credit = credit - cost;
 	}
 	
-	public void purchaseTroops(int cost){
-		this.credit = this.credit - cost;
+	public static void gainCredits(int gains){
+		credit = credit + gains;
 	}
 	
-	public void gainCredits(int gains){
-		this.credit = this.credit + gains;
+	public static void setCredits(int credits){
+		credit = credits;
 	}
 }
