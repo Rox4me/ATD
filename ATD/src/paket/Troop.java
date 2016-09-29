@@ -24,9 +24,9 @@ public class Troop {
 	//constructor
 	public Troop(int health, int speed, int troopImage, int cost){
 		this.cost=cost;
-		lastMove=System.nanoTime();
+		lastMove=Player.updateTime;
 		this.health = health;
-		this.speed = speed*1000000;
+		this.speed = speed;
 		this.troopImage = troopImage;
 		//create hitbox
 		hitBox = new Rectangle(positionX, positionY, 79, 41);
@@ -45,7 +45,7 @@ public class Troop {
 
 	public void move(){
 //		System.out.println("MOVE");
-		if(speed<System.nanoTime()-lastMove){
+		if(speed<Player.updateTime-lastMove){
 			double a = (double)cost/800;
 			Player.gainCredits(a);
 //			System.out.println("Gained creds" + a);
@@ -73,7 +73,7 @@ public class Troop {
 				hitBox.setLocation(positionX, positionY);
 			}
 			
-			lastMove=System.nanoTime();
+			lastMove=Player.updateTime;
 		}
 	}
 

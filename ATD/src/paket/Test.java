@@ -31,6 +31,7 @@ public class Test extends BasicGameState {
 		Troops.NTroops = 0;
 		Towers.Nturrets = 0;
 		Player.credit = Startcredit;
+		Player.updateTime=0;
 		
 		Troop.setSpawnPoint(0,350);
 		
@@ -67,12 +68,13 @@ public class Test extends BasicGameState {
 	int spawnDelay = 0;
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+		Player.updateTime++;
 		//exit game
 		if(container.getInput().isKeyDown(Input.KEY_ESCAPE)){
 			container.exit();
 		}
 		//spawnKey
-		if(spawnDelay == 30){
+		if(spawnDelay == 50){
 			if(container.getInput().isKeyDown(Input.KEY_S) && Troops.NTroops < 50){
 				Troops.createTroop();
 				spawnDelay = 0;
@@ -106,6 +108,7 @@ public class Test extends BasicGameState {
 				Enemy.health--;
 				//remove troop from game
 				Towers.killtroop(i);
+				Player.gainCredits(Startcredit/2);
 				if(Enemy.health <=0){
 					//enter victory screen
 					this.game.enterState(1);
@@ -115,7 +118,7 @@ public class Test extends BasicGameState {
 				Enemy.health--;
 				//remove troop from game
 				Towers.killtroop(i);
-				Player.gainCredits(Startcredit);
+				Player.gainCredits(Startcredit/2);
 				if(Enemy.health <=0){
 					//enter victory screen
 					this.game.enterState(1);
@@ -125,6 +128,7 @@ public class Test extends BasicGameState {
 				Enemy.health--;
 				//remove troop from game
 				Towers.killtroop(i);
+				Player.gainCredits(Startcredit/2);
 				if(Enemy.health <=0){
 					//enter victory screen
 					this.game.enterState(1);
@@ -134,6 +138,7 @@ public class Test extends BasicGameState {
 				Enemy.health--;
 				//remove troop from game
 				Towers.killtroop(i);
+				Player.gainCredits(Startcredit/2);
 				if(Enemy.health <=0){
 					//enter victory screen
 					this.game.enterState(1);

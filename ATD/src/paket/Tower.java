@@ -21,14 +21,14 @@ public class Tower {
 		this.x=x;
 		this.y=y;
 		this.DMG=DMG;
-		this.ROF=ROF * 1000000;
-		this.lastShot=System.nanoTime();
+		this.ROF=ROF * 1;
+		this.lastShot=Player.updateTime;
 		range = new Circle(this.x, this.y, 100);
 	}
 	//Shooting troops in range
 	public void shootTroop(Troop T, int i){
-		if(ROF<System.nanoTime()-lastShot){
-			lastShot=System.nanoTime();
+		if(ROF<Player.updateTime-lastShot){
+			lastShot=Player.updateTime;
 			//reduce troop health
 			T.setHealth(T.getHealth() - DMG);
 			//debug message, what troop was shot
@@ -39,7 +39,7 @@ public class Tower {
 				Towers.killtroop(i);
 			}
 			
-			lastShot=System.nanoTime();
+			lastShot=Player.updateTime;
 			
 		}else{
 //			System.out.println("Not ready to fire yet");
