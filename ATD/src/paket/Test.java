@@ -83,7 +83,7 @@ public class Test extends BasicGameState {
 		int posX = Mouse.getX();
 		int posY = Mouse.getY();
 		
-		//buy units
+		//buy helikopter
 		if((posX>246 && posX<310) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
 				Troops.createTroop();
@@ -92,7 +92,7 @@ public class Test extends BasicGameState {
 				spawnDelay++;
 			}
 		}
-		
+		//buy pansarvagn
 		if((posX>320 && posX<385) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
 				Troops.createTroop();
@@ -101,7 +101,7 @@ public class Test extends BasicGameState {
 				spawnDelay++;
 			}
 		}
-		
+		//buy bandvagn
 		if((posX>395 && posX<450) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
 				Troops.createTroop();
