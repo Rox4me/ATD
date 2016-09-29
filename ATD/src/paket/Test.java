@@ -73,7 +73,7 @@ public class Test extends BasicGameState {
 				if(Troops.troops[i].troopImage>3 && Troops.troops[i].troopImage < 8){
 					g.drawImage(propeller, Troops.troops[i].positionX+20, Troops.troops[i].positionY-20);
 				}
-			g.draw(Troops.troops[i].hitBox);
+//			g.draw(Troops.troops[i].hitBox);
 		}
 		
 		for(int i=0;i<Towers.Nturrets;i++){
@@ -150,7 +150,7 @@ public class Test extends BasicGameState {
 		if((posX>246 && posX<310) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
 				if(50 < Player.updateTime-lastSpawn){
-					Troops.createTroop(400, 1, 4 ,1000, 103, 36);
+					Troops.createTroop(400, 10, 4 ,1000, 103, 36);
 					lastSpawn = Player.updateTime;
 				}
 			}
@@ -159,7 +159,7 @@ public class Test extends BasicGameState {
 		if((posX>320 && posX<385) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
 				if(50 < Player.updateTime-lastSpawn){
-					Troops.createTroop(400, 4, 8 , 200, 59, 45);
+					Troops.createTroop(400, 40, 8 , 200, 59, 45);
 					lastSpawn = Player.updateTime;
 				}
 			}
@@ -168,7 +168,7 @@ public class Test extends BasicGameState {
 		if((posX>395 && posX<450) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
 				if(50 < Player.updateTime-lastSpawn){
-					Troops.createTroop(100, 1, 0, 50, 79, 41);
+					Troops.createTroop(100, 10, 0, 50, 79, 41);
 					lastSpawn = Player.updateTime;
 				}
 				
