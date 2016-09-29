@@ -16,6 +16,7 @@ public class Test extends BasicGameState {
 	Image background;
 	Image towerBase;
 	Image towerTurret;
+	private int Startcredit = 10000;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -29,7 +30,7 @@ public class Test extends BasicGameState {
 		towerTurret = new Image("textures/enemytop.png");
 		Troops.NTroops = 0;
 		Towers.Nturrets = 0;
-		Player.credit = 10000;
+		Player.credit = Startcredit;
 		
 		Troop.setSpawnPoint(0,350);
 		
@@ -114,6 +115,7 @@ public class Test extends BasicGameState {
 				Enemy.health--;
 				//remove troop from game
 				Towers.killtroop(i);
+				Player.gainCredits(Startcredit);
 				if(Enemy.health <=0){
 					//enter victory screen
 					this.game.enterState(1);

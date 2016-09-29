@@ -2,13 +2,13 @@ package paket;
 
 public class Player{
 	
-	static int credit = 1000000;
+	static double credit = 1000000;
 		
 	public static void purchaseTroops(int cost){
 		credit = credit - cost;
 	}
 	
-	public static void gainCredits(int gains){
+	public static void gainCredits(double gains){
 		credit = credit + gains;
 	}
 	

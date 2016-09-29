@@ -7,6 +7,7 @@ public class Troop {
 	private int health;
 	private int speed;
 	private int whichWay=1;
+	private int cost;
 	private long lastMove;
 	//position is not specified in the constructor as it should be specified by the map
 	int positionX = 0;
@@ -22,6 +23,7 @@ public class Troop {
 
 	//constructor
 	public Troop(int health, int speed, int troopImage, int cost){
+		this.cost=cost;
 		lastMove=System.nanoTime();
 		this.health = health;
 		this.speed = speed*1000000;
@@ -44,6 +46,12 @@ public class Troop {
 	public void move(){
 //		System.out.println("MOVE");
 		if(speed<System.nanoTime()-lastMove){
+			double a = (double)cost/800;
+			Player.gainCredits(a);
+//			System.out.println("Gained creds" + a);
+//			System.out.printf("%f", a);
+//			System.out.println();
+//			System.out.println(Player.credit);
 //			System.out.println("MOVED");
 			if(whichWay==1){
 //				System.out.println(positionX);
