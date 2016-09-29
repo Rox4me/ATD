@@ -13,7 +13,7 @@ public class Troops {
 			troops[NTroops]= new Troop(100, 10,0, 100);
 			NTroops++;
 			Player.purchaseTroops(50);
-			System.out.println("Player credits: " + Player.credit);
+//			System.out.println("Player credits: " + Player.credit);
 		}
 	
 	}

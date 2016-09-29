@@ -17,6 +17,7 @@ public class Test extends BasicGameState {
 	Image towerBase;
 	Image towerTurret;
 	private int Startcredit = 10000;
+	long lastSpawn;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -32,6 +33,8 @@ public class Test extends BasicGameState {
 		Towers.Nturrets = 0;
 		Player.credit = Startcredit;
 		Player.updateTime=0;
+		this.lastSpawn=0;
+		System.out.println("last spawn: " + lastSpawn);
 		
 		Troop.setSpawnPoint(0,350);
 		
@@ -41,6 +44,7 @@ public class Test extends BasicGameState {
 		
 	}
 
+	
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		//draw background
@@ -65,26 +69,25 @@ public class Test extends BasicGameState {
 		//draw tower range
 	}
 
-	int spawnDelay = 0;
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		Player.updateTime++;
+		System.out.println("u:"+lastSpawn);
 		//exit game
 		if(container.getInput().isKeyDown(Input.KEY_ESCAPE)){
 			container.exit();
 		}
 		//spawnKey
-		if(spawnDelay == 50){
+		if(50 < Player.updateTime-lastSpawn){
 			if(container.getInput().isKeyDown(Input.KEY_S) && Troops.NTroops < 50){
 				Troops.createTroop();
-				spawnDelay = 0;
+				lastSpawn = Player.updateTime;
 			}
-		}else{
-			spawnDelay++;
 		}
 		
 		if(container.getInput().isKeyDown(Input.KEY_R)){
 			container.reinit();
+			lastSpawn = 0;
 		}
 /*		if(container.getInput().isKeyDown(Input.KEY_R)){
 			container.reinit();
