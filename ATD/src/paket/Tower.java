@@ -13,6 +13,9 @@ public class Tower {
 	public int x;
 	public int y;
 	
+	boolean hasShot = false;
+	
+	public double aimingAt;
 	//used by intersect to determine if the tower can hit a troop
 	Circle range;
 	
@@ -28,6 +31,7 @@ public class Tower {
 	//Shooting troops in range
 	public void shootTroop(Troop T, int i){
 		if(ROF<Player.updateTime-lastShot){
+			this.hasShot = true;
 			lastShot=Player.updateTime;
 			//reduce troop health
 			T.setHealth(T.getHealth() - DMG);
@@ -41,11 +45,13 @@ public class Tower {
 			
 			lastShot=Player.updateTime;
 			
-		}else{
-//			System.out.println("Not ready to fire yet");
-			
 		}
 		
+		//calculate angle to fire at
+		float xDistance = T.positionX + (T.troopWidth/2) - this.x;
+		float yDistance = T.positionY + (T.troopHeight/2) - this.y;
+		this.aimingAt = Math.toDegrees(Math.atan2(yDistance, xDistance));
+				
 	}
 
 }

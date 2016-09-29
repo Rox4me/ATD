@@ -17,6 +17,7 @@ public class Test extends BasicGameState {
 	Image background;
 	Image towerBase;
 	Image towerTurret;
+	Image towerTurretLaser;
 	Image unitMenu;
 	private int Startcredit = 10000;
 	long lastSpawn;
@@ -31,13 +32,13 @@ public class Test extends BasicGameState {
 		background  = new Image("textures/map.png");
 		towerBase = new Image("textures/enemybottom.png");
 		towerTurret = new Image("textures/enemytop.png");
+		towerTurretLaser = new Image("textures/enemytoplaser.png");
 		unitMenu = new Image("textures/playmenystruktur.png");
 		Troops.NTroops = 0;
 		Towers.Nturrets = 0;
 		Player.credit = Startcredit;
 		Player.updateTime=0;
 		this.lastSpawn=0;
-		System.out.println("last spawn: " + lastSpawn);
 		
 		Troop.setSpawnPoint(0,350);
 		
@@ -65,21 +66,53 @@ public class Test extends BasicGameState {
 //			g.draw(Troops.troops[i].hitBox);
 		}
 		for(int i=0;i<Towers.Nturrets;i++){
+			//draw tower base
 			g.drawImage(towerBase, Towers.turrets[i].x-20, Towers.turrets[i].y-20);
-			g.drawImage(towerTurret, Towers.turrets[i].x-15, Towers.turrets[i].y-15);
+			//rotate image to "aim" at target
+			towerTurret.rotate((float)Towers.turrets[i].aimingAt - 90);
+			towerTurretLaser.rotate((float)Towers.turrets[i].aimingAt - 90);
+			//draw tower turret
+			if(Towers.turrets[i].hasShot){
+				//draw idle turret
+				g.drawImage(towerTurretLaser, Towers.turrets[i].x-15, Towers.turrets[i].y-15);
+			}else{
+				//draw firing turret
+				g.drawImage(towerTurret, Towers.turrets[i].x-15, Towers.turrets[i].y-15);
+			}
+			//reset tower rotation
+			towerTurret.setRotation(0);
+			towerTurretLaser.setRotation(0);
+			//draw towers range
 			g.draw(Towers.turrets[i].range);
 		}
 		
 		//draw tower range
+
+		//draw money
+		g.drawString(String.valueOf((int)Player.credit), 500, 20);
+		
 	}
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+		towerTurret.setCenterOfRotation(15, 15);
+		towerTurretLaser.setCenterOfRotation(15, 15);
 		Player.updateTime++;
-		System.out.println("u:"+lastSpawn);
 		//exit game
 		if(container.getInput().isKeyDown(Input.KEY_ESCAPE)){
 			container.exit();
+		}
+		//spawnKey
+		if(50 < Player.updateTime-lastSpawn){
+			if(container.getInput().isKeyDown(Input.KEY_S) && Troops.NTroops < 50){
+				Troops.createTroop();
+				lastSpawn = Player.updateTime;
+			}
+		}
+		//restart key
+		if(container.getInput().isKeyDown(Input.KEY_R)){
+			container.reinit();
+			lastSpawn = 0;
 		}
 		
 		Input input = container.getInput();
@@ -124,31 +157,7 @@ public class Test extends BasicGameState {
 			}
 		}
 
-		
-		//spawnKey
-		if(50 < Player.updateTime-lastSpawn){
-			if(container.getInput().isKeyDown(Input.KEY_S) && Troops.NTroops < 50){
-				Troops.createTroop();
-				lastSpawn = Player.updateTime;
-			}
-		}
-		
-		if(container.getInput().isKeyDown(Input.KEY_R)){
-			container.reinit();
-			lastSpawn = 0;
-		}
-/*		if(container.getInput().isKeyDown(Input.KEY_R)){
-			container.reinit();
-			for(int i = 0; i < Troops.NTroops; i++){
-				Troops.troops[i] = null;				
-			}
-			Troops.NTroops = 0;
-			for(int i = 0; i < Towers.Nturrets; i++){
-				Towers.turrets[i] = null;
-			}
-				Towers.Nturrets = 0;
-		}
-	*/	
+
 		
 //		System.out.println(Enemy.health);
 		//killing troops and checking if the enemy is dead (player has won)
@@ -197,13 +206,14 @@ public class Test extends BasicGameState {
 			}
 		}
 		//check if player has no credits and no troops (player has lost)
-		if(Player.credit <= 0 && Troops.NTroops == 0){
+		if(Player.credit < 50 && Troops.NTroops == 0){
 			//enter loss screen
 			this.game.enterState(2);
 		}
 		//	this.game.enterState(1);
 		//if troop 0 is within range of tower1 0
 		for(int i=0;i<Towers.Nturrets;i++){
+			Towers.turrets[i].hasShot = false;
 			for(int ii=0; ii<Troops.NTroops;ii++){
 				//debug message, what tower and troop is being checked
 				//if troop is within range of a tower.
