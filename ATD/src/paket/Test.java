@@ -90,35 +90,37 @@ public class Test extends BasicGameState {
 		//buy helikopter
 		if((posX>246 && posX<310) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
-				Troops.createTroop();
-				spawnDelay = 0;
-			}else{
-				spawnDelay++;
+				if(50 < Player.updateTime-lastSpawn){
+					Troops.createTroop();
+					lastSpawn = Player.updateTime;
+				}
 			}
 		}
 		//buy pansarvagn
 		if((posX>320 && posX<385) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
-				Troops.createTroop();
-				spawnDelay = 0;
-			}else{
-				spawnDelay++;
+				if(50 < Player.updateTime-lastSpawn){
+					Troops.createTroop();
+					lastSpawn = Player.updateTime;
+				}
 			}
 		}
 		//buy bandvagn
 		if((posX>395 && posX<450) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
-				Troops.createTroop();
-				spawnDelay = 0;
-			}else{
-				spawnDelay++;
+				if(50 < Player.updateTime-lastSpawn){
+					Troops.createTroop();
+					lastSpawn = Player.updateTime;
+				}
+				
 			}
 		}
 		
 		//restart game
 		if((posX>512 && posX<586) && (posY>8 && posY<30)){
 			if(input.isMousePressed(0)){
-				//TODO
+				container.reinit();
+				lastSpawn = 0;
 			}
 		}
 
