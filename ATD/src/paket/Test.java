@@ -1,5 +1,6 @@
 package paket;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -16,6 +17,7 @@ public class Test extends BasicGameState {
 	Image background;
 	Image towerBase;
 	Image towerTurret;
+	Image unitMenu;
 	private int Startcredit = 10000;
 	
 	@Override
@@ -28,6 +30,7 @@ public class Test extends BasicGameState {
 		background  = new Image("textures/map.png");
 		towerBase = new Image("textures/enemybottom.png");
 		towerTurret = new Image("textures/enemytop.png");
+		unitMenu = new Image("textures/playmenystruktur.png");
 		Troops.NTroops = 0;
 		Towers.Nturrets = 0;
 		Player.credit = Startcredit;
@@ -45,6 +48,7 @@ public class Test extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		//draw background
 		g.drawImage(background, 0,0);
+		g.drawImage(unitMenu, 200, 660);
 		//draw troops
 		for(int i=0;i<Troops.NTroops;i++){
 			if(Troops.troops[i].positionX > 200){
@@ -73,6 +77,48 @@ public class Test extends BasicGameState {
 		if(container.getInput().isKeyDown(Input.KEY_ESCAPE)){
 			container.exit();
 		}
+		
+		Input input = container.getInput();
+		
+		int posX = Mouse.getX();
+		int posY = Mouse.getY();
+		
+		//buy units
+		if((posX>246 && posX<310) && (posY>10 && posY<130)){
+			if(input.isMousePressed(0)){
+				Troops.createTroop();
+				spawnDelay = 0;
+			}else{
+				spawnDelay++;
+			}
+		}
+		
+		if((posX>320 && posX<385) && (posY>10 && posY<130)){
+			if(input.isMousePressed(0)){
+				Troops.createTroop();
+				spawnDelay = 0;
+			}else{
+				spawnDelay++;
+			}
+		}
+		
+		if((posX>395 && posX<450) && (posY>10 && posY<130)){
+			if(input.isMousePressed(0)){
+				Troops.createTroop();
+				spawnDelay = 0;
+			}else{
+				spawnDelay++;
+			}
+		}
+		
+		//restart game
+		if((posX>512 && posX<586) && (posY>8 && posY<30)){
+			if(input.isMousePressed(0)){
+				//TODO
+			}
+		}
+
+		
 		//spawnKey
 		if(spawnDelay == 50){
 			if(container.getInput().isKeyDown(Input.KEY_S) && Troops.NTroops < 50){
