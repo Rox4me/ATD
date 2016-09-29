@@ -102,11 +102,17 @@ public class Test extends BasicGameState {
 		//draw money
 		g.drawString(String.valueOf((int)Player.credit), 535, 667);
 		//draw health
-		g.drawString(String.valueOf(Enemy.health), 535, 690);
+		g.drawString(String.valueOf(Enemy.health), 535, 687);
 	}
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+		
+		Input input = container.getInput();
+
+		int posX = Mouse.getX();
+		int posY = Mouse.getY();
+		
 		towerTurret.setCenterOfRotation(15, 15);
 		towerTurretLaser.setCenterOfRotation(15, 15);
 		propeller.setCenterOfRotation(42, 41);
@@ -116,20 +122,21 @@ public class Test extends BasicGameState {
 		if(container.getInput().isKeyDown(Input.KEY_ESCAPE)){
 			container.exit();
 		}
+		
 		//spawnKey
-		if(50 < Player.updateTime-lastSpawn){
+		if(70 < Player.updateTime-lastSpawn){
 			if(container.getInput().isKeyDown(Input.KEY_A) && Troops.NTroops < 50){
 				Troops.createTroop(400, 10, 4, 1000, 103, 36);
 				lastSpawn = Player.updateTime;
 			}
 		}
-		if(50 < Player.updateTime-lastSpawn){
+		if(70 < Player.updateTime-lastSpawn){
 			if(container.getInput().isKeyDown(Input.KEY_S) && Troops.NTroops < 50){
 				Troops.createTroop(400, 40, 8, 200, 59, 45);
 				lastSpawn = Player.updateTime;
 			}
 		}
-		if(50 < Player.updateTime-lastSpawn){
+		if(70 < Player.updateTime-lastSpawn){
 			if(container.getInput().isKeyDown(Input.KEY_D) && Troops.NTroops < 50){
 				Troops.createTroop(100, 10, 0, 50, 79, 41);
 				lastSpawn = Player.updateTime;
@@ -141,15 +148,11 @@ public class Test extends BasicGameState {
 			lastSpawn = 0;
 		}
 		
-		Input input = container.getInput();
-		
-		int posX = Mouse.getX();
-		int posY = Mouse.getY();
 		
 		//buy helikopter
 		if((posX>246 && posX<310) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
-				if(50 < Player.updateTime-lastSpawn){
+				if(70 < Player.updateTime-lastSpawn){
 					Troops.createTroop(400, 10, 4 ,1000, 103, 36);
 					lastSpawn = Player.updateTime;
 				}
@@ -158,7 +161,7 @@ public class Test extends BasicGameState {
 		//buy pansarvagn
 		if((posX>320 && posX<385) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
-				if(50 < Player.updateTime-lastSpawn){
+				if(70 < Player.updateTime-lastSpawn){
 					Troops.createTroop(400, 40, 8 , 200, 59, 45);
 					lastSpawn = Player.updateTime;
 				}
@@ -167,7 +170,7 @@ public class Test extends BasicGameState {
 		//buy bandvagn
 		if((posX>395 && posX<450) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
-				if(50 < Player.updateTime-lastSpawn){
+				if(70 < Player.updateTime-lastSpawn){
 					Troops.createTroop(100, 10, 0, 50, 79, 41);
 					lastSpawn = Player.updateTime;
 				}
