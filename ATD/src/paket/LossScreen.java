@@ -10,19 +10,21 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class LossScreen extends BasicGameState {
 
-	Image lossScreen;
+	Image lossScreen[] = new Image[3];
 	StateBasedGame game;
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		lossScreen = new Image("textures/gameover.png");
+		lossScreen[0] = new Image("textures/gameoverlvl1.png");
+		lossScreen[1] = new Image("textures/gameoverlvl2.png");
+		lossScreen[2] = new Image("textures/gameoverlvl3.png");
 		this.game = game;
 
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		g.drawImage(lossScreen, 0, 0);		
+		g.drawImage(lossScreen[Start.mapID], 0, 0);		
 	}
 
 	@Override

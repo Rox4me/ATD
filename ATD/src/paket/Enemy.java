@@ -2,7 +2,7 @@ package paket;
 
 public class Enemy {
 
-	static int health = 4;	
+	static int health;	
 	
 	public static int getHealth(){
 		return health;

@@ -6,13 +6,13 @@ public class Troops {
 	//array of troops in the game
 	public static Troop[] troops = new Troop[51] ;	
 	
-	public static void createTroop(){
+	public static void createTroop(int health, int speed, int trooptype, int cost, int troopWidth, int troopHeight){
 		//only create troops if the player has not yet hit the troop limit
-		if(!(NTroops>=maxTroops) && (Player.credit - 50) >= 0){
+		if(!(NTroops>=maxTroops) && (Player.credit - cost) >= 0){
 			//create troop
-			troops[NTroops]= new Troop(100, 10,0, 100);
+			troops[NTroops]= new Troop(health, speed, trooptype, cost, troopWidth, troopHeight);
 			NTroops++;
-			Player.purchaseTroops(50);
+			Player.purchaseTroops(cost);
 //			System.out.println("Player credits: " + Player.credit);
 		}
 	

@@ -7,6 +7,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class Start extends StateBasedGame {
 	
+	public static int mapID;
+	
 	public Start(String name) {
 		super(name);
 

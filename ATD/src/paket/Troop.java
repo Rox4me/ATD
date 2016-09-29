@@ -18,19 +18,21 @@ public class Troop {
 	//gamestate saves an array of images for troops, this is used to select the image for this troop
 	int troopImage = 0;
 	
-	int troopWidth = 79;
-	int troopHeight = 41;
+	int troopWidth;
+	int troopHeight;
 	
 	//used by intersect() to check if a tower can hit the troop
 	Rectangle hitBox;
 
 	//constructor
-	public Troop(int health, int speed, int troopImage, int cost){
+	public Troop(int health, int speed, int troopImage, int cost, int troopWidth, int troopHeight){
 		this.cost=cost;
 		lastMove=Player.updateTime;
 		this.health = health;
 		this.speed = speed;
 		this.troopImage = troopImage;
+		this.troopWidth = troopWidth;
+		this.troopHeight = troopHeight;
 		//create hitbox
 		hitBox = new Rectangle(positionX, positionY, this.troopWidth, this.troopHeight);
 		this.positionX = spawnX;

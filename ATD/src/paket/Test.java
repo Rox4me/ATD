@@ -13,7 +13,9 @@ public class Test extends BasicGameState {
 
 	StateBasedGame game;
 
-	Image[] troopImages = new Image[4];
+	Image[] troopImages = new Image[12];
+	Image propeller;
+	
 	Image background;
 	Image towerBase;
 	Image towerTurret;
@@ -24,12 +26,22 @@ public class Test extends BasicGameState {
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+		Start.mapID = 0;
 		this.game = game;
-		//create tower and troop
+		//load images
 		troopImages[0] = new Image("textures/bandvagn.png");
 		troopImages[1] = new Image("textures/bandvagn.png");
 		troopImages[1].rotate(90);
+		troopImages[2] = new Image("textures/bandvagn.png");
+		troopImages[2].rotate(180);
+		troopImages[3] = new Image("textures/bandvagn.png");
+		troopImages[3].rotate(240);
+		troopImages[4] = new Image("textures/helikopter.png");
+		troopImages[8] = new Image("textures/pansarvagn.png");
+		propeller = new Image("textures/propeller.png");
+		//load map
 		background  = new Image("textures/map.png");
+		//load tower images
 		towerBase = new Image("textures/enemybottom.png");
 		towerTurret = new Image("textures/enemytop.png");
 		towerTurretLaser = new Image("textures/enemytoplaser.png");
@@ -39,6 +51,7 @@ public class Test extends BasicGameState {
 		Player.credit = Startcredit;
 		Player.updateTime=0;
 		this.lastSpawn=0;
+		Enemy.health= 20;
 		
 		Troop.setSpawnPoint(0,350);
 		
@@ -56,15 +69,13 @@ public class Test extends BasicGameState {
 		g.drawImage(unitMenu, 200, 660);
 		//draw troops
 		for(int i=0;i<Troops.NTroops;i++){
-			if(Troops.troops[i].positionX > 200){
-				g.drawImage(troopImages[Troops.troops[i].troopImage+1], Troops.troops[i].positionX, Troops.troops[i].positionY);
-				
-			}else{
 				g.drawImage(troopImages[Troops.troops[i].troopImage], Troops.troops[i].positionX, Troops.troops[i].positionY);
-				
-			}
-//			g.draw(Troops.troops[i].hitBox);
+				if(Troops.troops[i].troopImage>3 && Troops.troops[i].troopImage < 8){
+					g.drawImage(propeller, Troops.troops[i].positionX+20, Troops.troops[i].positionY-20);
+				}
+			g.draw(Troops.troops[i].hitBox);
 		}
+		
 		for(int i=0;i<Towers.Nturrets;i++){
 			//draw tower base
 			g.drawImage(towerBase, Towers.turrets[i].x-20, Towers.turrets[i].y-20);
@@ -83,13 +94,13 @@ public class Test extends BasicGameState {
 			towerTurret.setRotation(0);
 			towerTurretLaser.setRotation(0);
 			//draw towers range
-			g.draw(Towers.turrets[i].range);
+//			g.draw(Towers.turrets[i].range);
 		}
 		
 		//draw tower range
 
 		//draw money
-		g.drawString(String.valueOf((int)Player.credit), 500, 20);
+		g.drawString(String.valueOf((int)Player.credit), 500, 600);
 		
 	}
 
@@ -97,6 +108,8 @@ public class Test extends BasicGameState {
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		towerTurret.setCenterOfRotation(15, 15);
 		towerTurretLaser.setCenterOfRotation(15, 15);
+		propeller.setCenterOfRotation(42, 41);
+		propeller.rotate(1);
 		Player.updateTime++;
 		//exit game
 		if(container.getInput().isKeyDown(Input.KEY_ESCAPE)){
@@ -104,8 +117,20 @@ public class Test extends BasicGameState {
 		}
 		//spawnKey
 		if(50 < Player.updateTime-lastSpawn){
+			if(container.getInput().isKeyDown(Input.KEY_A) && Troops.NTroops < 50){
+				Troops.createTroop(400, 10, 4, 1000, 103, 36);
+				lastSpawn = Player.updateTime;
+			}
+		}
+		if(50 < Player.updateTime-lastSpawn){
 			if(container.getInput().isKeyDown(Input.KEY_S) && Troops.NTroops < 50){
-				Troops.createTroop();
+				Troops.createTroop(400, 40, 8, 200, 59, 45);
+				lastSpawn = Player.updateTime;
+			}
+		}
+		if(50 < Player.updateTime-lastSpawn){
+			if(container.getInput().isKeyDown(Input.KEY_D) && Troops.NTroops < 50){
+				Troops.createTroop(100, 10, 0, 50, 79, 41);
 				lastSpawn = Player.updateTime;
 			}
 		}
@@ -124,7 +149,7 @@ public class Test extends BasicGameState {
 		if((posX>246 && posX<310) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
 				if(50 < Player.updateTime-lastSpawn){
-					Troops.createTroop();
+					Troops.createTroop(400, 1, 4 ,1000, 103, 36);
 					lastSpawn = Player.updateTime;
 				}
 			}
@@ -133,7 +158,7 @@ public class Test extends BasicGameState {
 		if((posX>320 && posX<385) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
 				if(50 < Player.updateTime-lastSpawn){
-					Troops.createTroop();
+					Troops.createTroop(400, 4, 8 , 200, 59, 45);
 					lastSpawn = Player.updateTime;
 				}
 			}
@@ -142,7 +167,7 @@ public class Test extends BasicGameState {
 		if((posX>395 && posX<450) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
 				if(50 < Player.updateTime-lastSpawn){
-					Troops.createTroop();
+					Troops.createTroop(100, 1, 0, 50, 79, 41);
 					lastSpawn = Player.updateTime;
 				}
 				
