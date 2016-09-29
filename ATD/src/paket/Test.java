@@ -100,8 +100,9 @@ public class Test extends BasicGameState {
 		//draw tower range
 
 		//draw money
-		g.drawString(String.valueOf((int)Player.credit), 500, 600);
-		
+		g.drawString(String.valueOf((int)Player.credit), 535, 667);
+		//draw health
+		g.drawString(String.valueOf(Enemy.health), 535, 690);
 	}
 
 	@Override
