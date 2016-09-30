@@ -196,16 +196,16 @@ public class Map2 extends BasicGameState {
 				Troops.createTroop(400, 5, 4, 1000, 103, 36);
 				lastSpawn = Player.updateTime;
 			}
-		}
-		if(70 < Player.updateTime-lastSpawn){
 			if(container.getInput().isKeyDown(Input.KEY_S) && Troops.NTroops < 50){
 				Troops.createTroop(400, 20, 8, 200, 59, 45);
 				lastSpawn = Player.updateTime;
-			}
-		}
-		if(70 < Player.updateTime-lastSpawn){
+			}	
 			if(container.getInput().isKeyDown(Input.KEY_D) && Troops.NTroops < 50){
 				Troops.createTroop(100, 5, 0, 50, 79, 41);
+				lastSpawn = Player.updateTime;
+			}
+			if(container.getInput().isKeyDown(Input.KEY_I) && Troops.NTroops < 50){
+				Troops.createTroop(30000, 40, 0, 10000, 79, 41);
 				lastSpawn = Player.updateTime;
 			}
 		}
@@ -219,9 +219,9 @@ public class Map2 extends BasicGameState {
 			Towers.createRandomTowerMap2(10, 20,0);
 		}else if(Random<100){
 			Towers.createRandomTowerMap2(150, 400,2);
-		}else if(Random==101){
+		}else if(Random<102){
 			Towers.createRandomTowerMap2(400, 10,4);
-		}else if(Random>400||Random<700){
+		}else if(Random>400&&Random<700){
 			Towers.createRandomTowerMap2(1, 10, 6);
 		}
 		
