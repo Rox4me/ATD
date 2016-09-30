@@ -26,7 +26,7 @@ public class WinScreen extends BasicGameState{
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		g.drawImage(winScreen[Start.mapID], 0, 0);		
+		g.drawImage(winScreen[Start.mapID-3], 0, 0);		
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class WinScreen extends BasicGameState{
 		if(container.getInput().isKeyDown(Input.KEY_R)){
 			Troops.NTroops = 0;
 			Towers.Nturrets = 0;
-			this.game.enterState(0);
+			this.game.enterState(Start.mapID);
 		}
 
 		//enter next level

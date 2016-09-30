@@ -265,6 +265,7 @@ public class Map2 extends BasicGameState {
 				Player.gainCredits(Startcredit/2);
 				if(Enemy.health <=0){
 					//enter victory screen
+					Start.mapID = 4;
 					this.game.enterState(1);
 				}
 			//if troop is out of map
@@ -275,6 +276,7 @@ public class Map2 extends BasicGameState {
 				Player.gainCredits(Startcredit/2);
 				if(Enemy.health <=0){
 					//enter victory screen
+					Start.mapID = 4;
 					this.game.enterState(1);
 				}
 			//if troop is out of map
@@ -285,6 +287,7 @@ public class Map2 extends BasicGameState {
 				Player.gainCredits(Startcredit/2);
 				if(Enemy.health <=0){
 					//enter victory screen
+					Start.mapID = 4;
 					this.game.enterState(1);
 				}
  			//if troop is out of map
@@ -295,6 +298,7 @@ public class Map2 extends BasicGameState {
 				Player.gainCredits(Startcredit/2);
 				if(Enemy.health <=0){
 					//enter victory screen
+					Start.mapID = 4;
 					this.game.enterState(1);
 				}
 			}
@@ -302,6 +306,7 @@ public class Map2 extends BasicGameState {
 		//check if player has no credits and no troops (player has lost)
 		if(Player.credit < 50 && Troops.NTroops == 0){
 			//enter loss screen
+			Start.mapID = 4;
 			this.game.enterState(2);
 		}
 		//	this.game.enterState(1);
