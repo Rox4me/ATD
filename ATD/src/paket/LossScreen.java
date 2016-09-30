@@ -24,7 +24,7 @@ public class LossScreen extends BasicGameState {
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		g.drawImage(lossScreen[Start.mapID], 0, 0);		
+		g.drawImage(lossScreen[Start.mapID-3], 0, 0);		
 	}
 
 	@Override

@@ -13,25 +13,28 @@ public class Tower {
 	public int x;
 	public int y;
 	
+	public int imageID;
+	
 	public boolean hasShot = false;
 	
 	public double aimingAt;
 	//used by intersect to determine if the tower can hit a troop
 	public Circle range;
 	
-	public Tower(int x, int y, int DMG, int ROF){
+	public Tower(int x, int y, int DMG, int ROF, int imageID){
 		//create range "hitbox"
 		this.x=x;
 		this.y=y;
 		this.DMG=DMG;
 		this.ROF=ROF;
+		this.imageID = imageID;
 		this.lastShot=Player.updateTime;
 		range = new Circle(this.x, this.y, 100);
 	}
 	//Shooting troops in range
 	public void shootTroop(Troop T, int i){
 		if(ROF<Player.updateTime-lastShot){
-			System.out.println(Player.updateTime-lastShot);
+//			System.out.println(Player.updateTime-lastShot);
 			//if true paint shot(laser)
 			this.hasShot = true;
 			lastShot=Player.updateTime;

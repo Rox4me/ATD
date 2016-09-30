@@ -66,8 +66,8 @@ public class Test extends BasicGameState {
 		Troop.setSpawnPoint(0,350);
 		
 		//Create towers, x, y, DMG, ROF
-		Towers.createTower(100, 300, 40, 60);
-		Towers.createTower(400, 300, 40, 60);
+		Towers.createTower(100, 300, 40, 60,0);
+		Towers.createTower(400, 300, 40, 60,0);
 	
 		
 	}

@@ -24,6 +24,8 @@ public class Map2 extends BasicGameState {
 	Image[] troopImages = new Image[12];
 	Image propeller;
 	
+	Image[] turretImages = new Image[8];
+	
 	Image background;
 	Image towerBase;
 	Image towerTurret;
@@ -72,7 +74,18 @@ public class Map2 extends BasicGameState {
 		towerTurretLaser = new Image("textures/enemytoplaser.png");
 		unitMenu = new Image("textures/playmenystruktur.png");
 		level2 = new Image("textures/level2.png");
-				
+		
+		//create tower image
+		turretImages[0] = new Image("textures/enemytop.png");
+		turretImages[1] = new Image("textures/enemytoplaser.png");
+		turretImages[2] = new Image("textures/enemytop2.png");
+		turretImages[3] = new Image("textures/enemytoplaser2.png");
+		turretImages[4] = new Image("textures/enemytop3.png");
+		turretImages[5] = new Image("textures/enemytoplaser3.png");
+		turretImages[6] = new Image("textures/enemytop4.png");
+		turretImages[7] = new Image("textures/enemytoplaser4.png");
+		
+		
 		Troops.NTroops = 0;
 		Towers.Nturrets = 0;
 		Player.credit = Startcredit;
@@ -102,10 +115,6 @@ public class Map2 extends BasicGameState {
  * 	höger,upp,vänster,ner
 */	
 		Troop.setSpawnPoint(0,350);
-		
-		//Create towers, x, y, DMG, ROF
-		Towers.createTower(100, 300, 40, 60);
-		Towers.createTower(400, 300, 40, 60);
 	
 		
 
@@ -133,19 +142,19 @@ public class Map2 extends BasicGameState {
 			//draw tower base
 			g.drawImage(towerBase, Towers.turrets[i].x-20, Towers.turrets[i].y-20);
 			//rotate image to "aim" at target
-			towerTurret.rotate((float)Towers.turrets[i].aimingAt - 90);
-			towerTurretLaser.rotate((float)Towers.turrets[i].aimingAt - 90);
+			turretImages[Towers.turrets[i].imageID+1].rotate((float)Towers.turrets[i].aimingAt - 90);
+			turretImages[Towers.turrets[i].imageID].rotate((float)Towers.turrets[i].aimingAt - 90);
 			//draw tower turret
 			if(Towers.turrets[i].hasShot){
 				//draw idle turret
-				g.drawImage(towerTurretLaser, Towers.turrets[i].x-15, Towers.turrets[i].y-15);
+				g.drawImage(turretImages[Towers.turrets[i].imageID+1], Towers.turrets[i].x-15, Towers.turrets[i].y-15);
 			}else{
 				//draw firing turret
-				g.drawImage(towerTurret, Towers.turrets[i].x-15, Towers.turrets[i].y-15);
+				g.drawImage(turretImages[Towers.turrets[i].imageID], Towers.turrets[i].x-15, Towers.turrets[i].y-15);
 			}
 			//reset tower rotation
-			towerTurret.setRotation(0);
-			towerTurretLaser.setRotation(0);
+			turretImages[Towers.turrets[i].imageID+1].setRotation(0);
+			turretImages[Towers.turrets[i].imageID].setRotation(0);
 			//draw towers range
 //			g.draw(Towers.turrets[i].range);
 		}
@@ -158,16 +167,15 @@ public class Map2 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		if(container.getInput().isKeyDown(Input.KEY_Q)){
-			Towers.createRandomTowerMap2(10, 10);
-		}
 		Input input = container.getInput();
 
 		int posX = Mouse.getX();
 		int posY = Mouse.getY();
 		
-		towerTurret.setCenterOfRotation(15, 15);
-		towerTurretLaser.setCenterOfRotation(15, 15);
+		for(int i = 0; i < turretImages.length; i++){
+			turretImages[i].setCenterOfRotation(15, 15);
+		}
+		
 		propeller.setCenterOfRotation(42, 41);
 		propeller.rotate(1);
 		Player.updateTime++;
@@ -175,23 +183,29 @@ public class Map2 extends BasicGameState {
 		if(container.getInput().isKeyDown(Input.KEY_ESCAPE)){
 			container.exit();
 		}
+		if(container.getInput().isKeyDown(Input.KEY_LEFT)){
+			Towers.Nturrets = 0;
+			Troops.NTroops = 0;
+			this.game.enterState(3);
+		}
+		
 		
 		//spawnKey
 		if(70 < Player.updateTime-lastSpawn){
 			if(container.getInput().isKeyDown(Input.KEY_A) && Troops.NTroops < 50){
-				Troops.createTroop(400, 10, 4, 1000, 103, 36);
+				Troops.createTroop(400, 5, 4, 1000, 103, 36);
 				lastSpawn = Player.updateTime;
 			}
 		}
 		if(70 < Player.updateTime-lastSpawn){
 			if(container.getInput().isKeyDown(Input.KEY_S) && Troops.NTroops < 50){
-				Troops.createTroop(400, 40, 8, 200, 59, 45);
+				Troops.createTroop(400, 20, 8, 200, 59, 45);
 				lastSpawn = Player.updateTime;
 			}
 		}
 		if(70 < Player.updateTime-lastSpawn){
 			if(container.getInput().isKeyDown(Input.KEY_D) && Troops.NTroops < 50){
-				Troops.createTroop(100, 10, 0, 50, 79, 41);
+				Troops.createTroop(100, 5, 0, 50, 79, 41);
 				lastSpawn = Player.updateTime;
 			}
 		}
@@ -200,13 +214,22 @@ public class Map2 extends BasicGameState {
 			container.reinit();
 			lastSpawn = 0;
 		}
-		
+		int Random = (int) (1000*Math.random());
+		if(Random>900){
+			Towers.createRandomTowerMap2(10, 20,0);
+		}else if(Random<100){
+			Towers.createRandomTowerMap2(150, 400,2);
+		}else if(Random==101){
+			Towers.createRandomTowerMap2(400, 10,4);
+		}else if(Random>400||Random<700){
+			Towers.createRandomTowerMap2(1, 10, 6);
+		}
 		
 		//buy helikopter
 		if((posX>246 && posX<310) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
 				if(70 < Player.updateTime-lastSpawn){
-					Troops.createTroop(400, 10, 4 ,1000, 103, 36);
+					Troops.createTroop(400, 5, 4 ,1000, 103, 36);
 					lastSpawn = Player.updateTime;
 				}
 			}
@@ -215,7 +238,7 @@ public class Map2 extends BasicGameState {
 		if((posX>320 && posX<385) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
 				if(70 < Player.updateTime-lastSpawn){
-					Troops.createTroop(400, 40, 8 , 200, 59, 45);
+					Troops.createTroop(400, 20, 8 , 200, 59, 45);
 					lastSpawn = Player.updateTime;
 				}
 			}
@@ -224,7 +247,7 @@ public class Map2 extends BasicGameState {
 		if((posX>395 && posX<450) && (posY>10 && posY<130)){
 			if(input.isMousePressed(0)){
 				if(70 < Player.updateTime-lastSpawn){
-					Troops.createTroop(100, 10, 0, 50, 79, 41);
+					Troops.createTroop(100, 5, 0, 50, 79, 41);
 					lastSpawn = Player.updateTime;
 				}
 				
@@ -243,7 +266,6 @@ public class Map2 extends BasicGameState {
 		//-------------------------------------------------------------------------------------------------------------------
 		for(int i = 0; i < Troops.NTroops; i++){
 			for(int c = 0; c < corners.length; c++){
-				System.out.println(c);
 				if(Troops.troops[i].hitBox.intersects(corners[c])){
 					Troops.troops[i].whichWay = turnTo[c];
 				}
