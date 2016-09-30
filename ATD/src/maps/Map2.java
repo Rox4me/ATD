@@ -6,6 +6,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -28,6 +29,11 @@ public class Map2 extends BasicGameState {
 	Image towerTurret;
 	Image towerTurretLaser;
 	Image unitMenu;
+
+	//hitboxes to change direction troops move in
+	Rectangle[] corners = new Rectangle[8];
+	int[] turnTo = new int[8];
+	
 	private int Startcredit = 10000;
 	long lastSpawn;
 	
@@ -37,13 +43,25 @@ public class Map2 extends BasicGameState {
 		//load images
 		troopImages[0] = new Image("textures/bandvagn.png");
 		troopImages[1] = new Image("textures/bandvagn.png");
-		troopImages[1].rotate(90);
+		troopImages[1].rotate(270);
 		troopImages[2] = new Image("textures/bandvagn.png");
 		troopImages[2].rotate(180);
 		troopImages[3] = new Image("textures/bandvagn.png");
-		troopImages[3].rotate(240);
+		troopImages[3].rotate(90);
 		troopImages[4] = new Image("textures/helikopter.png");
+		troopImages[5] = new Image("textures/helikopter.png");
+		troopImages[5].rotate(270);
+		troopImages[6] = new Image("textures/helikopter.png");
+		troopImages[6].rotate(180);
+		troopImages[7] = new Image("textures/helikopter.png");
+		troopImages[7].rotate(90);
 		troopImages[8] = new Image("textures/pansarvagn.png");
+		troopImages[9] = new Image("textures/pansarvagn.png");
+		troopImages[9].rotate(270);
+		troopImages[10] = new Image("textures/pansarvagn.png");
+		troopImages[10].rotate(180);
+		troopImages[11] = new Image("textures/pansarvagn.png");
+		troopImages[11].rotate(90);
 		propeller = new Image("textures/propeller.png");
 		//load map
 		background  = new Image("textures/map2.png");
@@ -59,6 +77,27 @@ public class Map2 extends BasicGameState {
 		this.lastSpawn=0;
 		Enemy.health= 20;
 		
+		//create corners
+		corners[0]= new Rectangle(180,340,1,60);
+		corners[1]= new Rectangle(120,60,60,1);
+		corners[2]= new Rectangle(680,60,1,60);
+		corners[3]= new Rectangle(620,280,60,1);
+		corners[4]= new Rectangle(260,220,1,60);
+		corners[5]= new Rectangle(260,600,60,1);
+		corners[6]= new Rectangle(620,540,1,60);
+		corners[7]= new Rectangle(560,340,60,1);
+		
+		turnTo[0] = 2;
+		turnTo[1] = 1;
+		turnTo[2] = 4;
+		turnTo[3] = 3;
+		turnTo[4] = 4;
+		turnTo[5] = 1;
+		turnTo[6] = 2;
+		turnTo[7] = 1;
+/* 
+ * 	höger,upp,vänster,ner
+*/	
 		Troop.setSpawnPoint(0,350);
 		
 		//Create towers, x, y, DMG, ROF
@@ -79,7 +118,7 @@ public class Map2 extends BasicGameState {
 		g.drawImage(unitMenu, 200, 660);
 		//draw troops
 		for(int i=0;i<Troops.NTroops;i++){
-				g.drawImage(troopImages[Troops.troops[i].troopImage], Troops.troops[i].positionX, Troops.troops[i].positionY);
+				g.drawImage(troopImages[Troops.troops[i].troopImage - 1 + Troops.troops[i].whichWay], Troops.troops[i].positionX, Troops.troops[i].positionY);
 				if(Troops.troops[i].troopImage>3 && Troops.troops[i].troopImage < 8){
 					g.drawImage(propeller, Troops.troops[i].positionX+20, Troops.troops[i].positionY-20);
 				}
@@ -107,6 +146,11 @@ public class Map2 extends BasicGameState {
 //			g.draw(Towers.turrets[i].range);
 		}
 		
+		//draw corners
+		for(int i = 0;i < 8; i++){
+			g.draw(corners[i]);
+		}
+		
 		//draw tower range
 
 		//draw money
@@ -117,7 +161,9 @@ public class Map2 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		
+		if(container.getInput().isKeyDown(Input.KEY_Q)){
+			Towers.createRandomTowerMap2(10, 10);
+		}
 		Input input = container.getInput();
 
 		int posX = Mouse.getX();
@@ -196,7 +242,16 @@ public class Map2 extends BasicGameState {
 			}
 		}
 
-
+		//troops moving in different directions
+		//-------------------------------------------------------------------------------------------------------------------
+		for(int i = 0; i < Troops.NTroops; i++){
+			for(int c = 0; c < corners.length; c++){
+				System.out.println(c);
+				if(Troops.troops[i].hitBox.intersects(corners[c])){
+					Troops.troops[i].whichWay = turnTo[c];
+				}
+			}
+		}
 		
 //		System.out.println(Enemy.health);
 		//killing troops and checking if the enemy is dead (player has won)
@@ -251,6 +306,7 @@ public class Map2 extends BasicGameState {
 		}
 		//	this.game.enterState(1);
 		//if troop 0 is within range of tower1 0
+		
 		for(int i=0;i<Towers.Nturrets;i++){
 			//if tower animation for shooting should not be painted
 			if(40<Player.updateTime-Towers.turrets[i].lastShot){
@@ -271,7 +327,7 @@ public class Map2 extends BasicGameState {
 //					System.out.println("Hitbox check 1: " + i+": Hitbox check 2: "+ii + "  | false");
 				}
 			}
-			
+		
 		}
 		
 
@@ -279,7 +335,7 @@ public class Map2 extends BasicGameState {
 
 	@Override
 	public int getID() {
-		return 3;
+		return 4;
 	}
 
 }
