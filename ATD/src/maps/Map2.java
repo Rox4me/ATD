@@ -150,13 +150,6 @@ public class Map2 extends BasicGameState {
 //			g.draw(Towers.turrets[i].range);
 		}
 		
-		//draw corners
-		for(int i = 0;i < 8; i++){
-			g.draw(corners[i]);
-		}
-		
-		//draw tower range
-
 		//draw money
 		g.drawString(String.valueOf((int)Player.credit), 535, 667);
 		//draw health
@@ -266,45 +259,13 @@ public class Map2 extends BasicGameState {
 				Enemy.health--;
 				//remove troop from game
 				Towers.killtroop(i);
-				Player.gainCredits(Startcredit/2);
+				Player.gainCredits(500);
 				if(Enemy.health <=0){
 					//enter victory screen
 					Start.mapID = 4;
 					this.game.enterState(1);
 				}
 			//if troop is out of map
-			}else if(Troops.troops[i].positionX < 0){
-				Enemy.health--;
-				//remove troop from game
-				Towers.killtroop(i);
-				Player.gainCredits(Startcredit/2);
-				if(Enemy.health <=0){
-					//enter victory screen
-					Start.mapID = 4;
-					this.game.enterState(1);
-				}
-			//if troop is out of map
-			}else if(Troops.troops[i].positionY > 800){
-				Enemy.health--;
-				//remove troop from game
-				Towers.killtroop(i);
-				Player.gainCredits(Startcredit/2);
-				if(Enemy.health <=0){
-					//enter victory screen
-					Start.mapID = 4;
-					this.game.enterState(1);
-				}
- 			//if troop is out of map
-			}else if(Troops.troops[i].positionY < 0){
-				Enemy.health--;
-				//remove troop from game
-				Towers.killtroop(i);
-				Player.gainCredits(Startcredit/2);
-				if(Enemy.health <=0){
-					//enter victory screen
-					Start.mapID = 4;
-					this.game.enterState(1);
-				}
 			}
 		}
 		//check if player has no credits and no troops (player has lost)
