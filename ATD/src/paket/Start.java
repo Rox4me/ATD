@@ -5,6 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import maps.Map2;
 import maps.Test;
 
 public class Start extends StateBasedGame {
@@ -37,6 +38,7 @@ public class Start extends StateBasedGame {
 		this.addState(new Test());
 		this.addState(new WinScreen());
 		this.addState(new LossScreen());
+		this.addState(new Map2());
 		
 		
 	}
