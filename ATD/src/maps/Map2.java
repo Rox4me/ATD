@@ -6,6 +6,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -28,6 +29,10 @@ public class Map2 extends BasicGameState {
 	Image towerTurret;
 	Image towerTurretLaser;
 	Image unitMenu;
+
+	//hitboxes to change direction troops move in
+	Rectangle[] corners = new Rectangle[8];
+	
 	private int Startcredit = 10000;
 	long lastSpawn;
 	
@@ -58,6 +63,18 @@ public class Map2 extends BasicGameState {
 		Player.updateTime=0;
 		this.lastSpawn=0;
 		Enemy.health= 20;
+		
+		//create corners
+		corners[0]= new Rectangle(10,10,0,0);
+		corners[1]= new Rectangle(10,10,11,11);
+		corners[2]= new Rectangle(10,10,22,22);
+		corners[3]= new Rectangle(10,10,33,33);
+		corners[4]= new Rectangle(10,10,44,44);
+		corners[5]= new Rectangle(10,10,55,55);
+		corners[6]= new Rectangle(10,10,66,66);
+		corners[7]= new Rectangle(10,10,77,77);
+		
+		
 		
 		Troop.setSpawnPoint(0,350);
 		
@@ -105,6 +122,11 @@ public class Map2 extends BasicGameState {
 			towerTurretLaser.setRotation(0);
 			//draw towers range
 //			g.draw(Towers.turrets[i].range);
+		}
+		
+		//draw corners
+		for(int i = 0;i < 8; i++){
+			g.draw(corners[i]);
 		}
 		
 		//draw tower range
@@ -196,6 +218,8 @@ public class Map2 extends BasicGameState {
 			}
 		}
 
+		//troops moving in different directions
+		//-------------------------------------------------------------------------------------------------------------------
 
 		
 //		System.out.println(Enemy.health);
@@ -279,7 +303,7 @@ public class Map2 extends BasicGameState {
 
 	@Override
 	public int getID() {
-		return 3;
+		return 4;
 	}
 
 }

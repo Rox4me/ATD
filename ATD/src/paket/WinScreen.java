@@ -48,7 +48,7 @@ public class WinScreen extends BasicGameState{
 
 		//enter next level
 		if((posX>270 && posX<550) && (posY>460 && posY<540)){
-			this.game.enterState(3);
+			this.game.enterState(4);
 			
 		}
 		

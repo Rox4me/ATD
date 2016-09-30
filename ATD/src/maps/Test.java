@@ -118,8 +118,13 @@ public class Test extends BasicGameState {
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+		//enter menu
+		if(container.getInput().isKeyDown(Input.KEY_UP)){
+			this.game.enterState(0);
+		}
+		
 		if(container.getInput().isKeyDown(Input.KEY_RIGHT)){
-			this.game.enterState(3);
+			this.game.enterState(4);
 		}
 		Input input = container.getInput();
 
@@ -283,7 +288,7 @@ public class Test extends BasicGameState {
 
 	@Override
 	public int getID() {
-		return 0;
+		return 3;
 	}
 
 }

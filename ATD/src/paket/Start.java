@@ -39,6 +39,7 @@ public class Start extends StateBasedGame {
 		this.addState(new WinScreen());
 		this.addState(new LossScreen());
 		this.addState(new Map2());
+		this.addState(new Menu());
 		
 		
 	}
