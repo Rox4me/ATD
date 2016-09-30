@@ -45,11 +45,24 @@ public class WinScreen extends BasicGameState{
 			Towers.Nturrets = 0;
 			this.game.enterState(Start.mapID);
 		}
+		if(container.getInput().isKeyDown(Input.KEY_N)){
+			Troops.NTroops = 0;
+			Towers.Nturrets = 0;
+			this.game.enterState(Start.mapID+1);
+		}
 
 		//enter next level
 		if((posX>270 && posX<550) && (posY>460 && posY<540)){
-			this.game.enterState(4);
-			
+			if(input.isMousePressed(0)){
+				this.game.enterState(4);
+			}
+		}
+		if((posX>250 && posX<540) && (posY>430 && posY<510)){
+			if(input.isMousePressed(0)){
+				Troops.NTroops = 0;
+				Towers.Nturrets = 0;
+				this.game.enterState(Start.mapID+1);
+			}
 		}
 		
 	}
