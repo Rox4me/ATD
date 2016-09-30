@@ -115,7 +115,9 @@ public class Test extends BasicGameState {
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		
+		if(container.getInput().isKeyDown(Input.KEY_RIGHT)){
+			this.game.enterState(3);
+		}
 		Input input = container.getInput();
 
 		int posX = Mouse.getX();
@@ -193,6 +195,7 @@ public class Test extends BasicGameState {
 				lastSpawn = 0;
 			}
 		}
+		
 
 
 		

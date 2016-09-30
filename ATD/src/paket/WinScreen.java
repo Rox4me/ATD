@@ -1,5 +1,6 @@
 package paket;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -30,6 +31,11 @@ public class WinScreen extends BasicGameState{
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+		Input input = container.getInput();
+
+		int posX = Mouse.getX();
+		int posY = Mouse.getY();
+
 		//exit game
 		if(container.getInput().isKeyDown(Input.KEY_ESCAPE)){
 			container.exit();
@@ -40,7 +46,11 @@ public class WinScreen extends BasicGameState{
 			this.game.enterState(0);
 		}
 
-
+		//enter next level
+		if((posX>270 && posX<550) && (posY>460 && posY<540)){
+			this.game.enterState(3);
+		}
+		
 	}
 
 	@Override
