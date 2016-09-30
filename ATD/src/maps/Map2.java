@@ -31,8 +31,7 @@ public class Map2 extends BasicGameState {
 	private int Startcredit = 10000;
 	long lastSpawn;
 	
-	@Override
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+	public void enter(GameContainer container, StateBasedGame game) throws SlickException{
 		Start.mapID = 0;
 		this.game = game;
 		//load images
@@ -67,9 +66,12 @@ public class Map2 extends BasicGameState {
 		Towers.createTower(400, 300, 40, 60);
 	
 		
+
+	}
+	@Override
+	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 	}
 
-	
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		//draw background

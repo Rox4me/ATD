@@ -32,7 +32,7 @@ public class WinScreen extends BasicGameState{
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		Input input = container.getInput();
-
+		
 		int posX = Mouse.getX();
 		int posY = Mouse.getY();
 
@@ -49,6 +49,7 @@ public class WinScreen extends BasicGameState{
 		//enter next level
 		if((posX>270 && posX<550) && (posY>460 && posY<540)){
 			this.game.enterState(3);
+			
 		}
 		
 	}
