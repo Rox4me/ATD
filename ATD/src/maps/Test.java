@@ -118,6 +118,10 @@ public class Test extends BasicGameState {
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+		if(container.getInput().isKeyDown(Input.KEY_Q)){
+			Towers.createRandomTowerMap2(10, 10);
+		}
+		
 		if(container.getInput().isKeyDown(Input.KEY_RIGHT)){
 			this.game.enterState(3);
 		}
