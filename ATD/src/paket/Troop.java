@@ -6,7 +6,7 @@ public class Troop {
 		
 	private int health;
 	private int speed;
-	private int whichWay=1;
+	public int whichWay=1;
 	private int cost;
 	private long lastMove;
 	//position is not specified in the constructor as it should be specified by the map
