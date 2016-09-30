@@ -13,11 +13,11 @@ public class Tower {
 	public int x;
 	public int y;
 	
-	boolean hasShot = false;
+	public boolean hasShot = false;
 	
 	public double aimingAt;
 	//used by intersect to determine if the tower can hit a troop
-	Circle range;
+	public Circle range;
 	
 	public Tower(int x, int y, int DMG, int ROF){
 		//create range "hitbox"

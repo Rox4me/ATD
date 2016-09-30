@@ -10,19 +10,19 @@ public class Troop {
 	private int cost;
 	private long lastMove;
 	//position is not specified in the constructor as it should be specified by the map
-	int positionX = 0;
-	int positionY = 0;
+	public int positionX = 0;
+	public int positionY = 0;
 	
 	static int spawnX = 0;
 	static int spawnY = 0;
 	//gamestate saves an array of images for troops, this is used to select the image for this troop
-	int troopImage = 0;
+	public int troopImage = 0;
 	
 	int troopWidth;
 	int troopHeight;
 	
 	//used by intersect() to check if a tower can hit the troop
-	Rectangle hitBox;
+	public Rectangle hitBox;
 
 	//constructor
 	public Troop(int health, int speed, int troopImage, int cost, int troopWidth, int troopHeight){

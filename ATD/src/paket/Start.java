@@ -5,6 +5,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import maps.Test;
+
 public class Start extends StateBasedGame {
 	
 	public static int mapID;

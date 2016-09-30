@@ -2,7 +2,7 @@ package paket;
 
 public class Player{
 	
-	static double credit;
+	public static double credit;
 	public static long updateTime=0;
 		
 	public static void purchaseTroops(int cost){

@@ -1,4 +1,4 @@
-package paket;
+package maps;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
@@ -8,6 +8,13 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import paket.Enemy;
+import paket.Player;
+import paket.Start;
+import paket.Towers;
+import paket.Troop;
+import paket.Troops;
 
 public class Test extends BasicGameState {
 
@@ -56,8 +63,8 @@ public class Test extends BasicGameState {
 		Troop.setSpawnPoint(0,350);
 		
 		//Create towers, x, y, DMG, ROF
-		Towers.createTower(100, 300, 10, 50);
-		Towers.createTower(400, 300, 10, 50);
+		Towers.createTower(100, 300, 40, 60);
+		Towers.createTower(400, 300, 40, 60);
 	
 		
 	}
