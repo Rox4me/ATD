@@ -55,8 +55,9 @@ public class Test extends BasicGameState {
 		
 		Troop.setSpawnPoint(0,350);
 		
-		Towers.createTower(100, 300, 1, 1);
-		Towers.createTower(400, 300, 1, 1);
+		//Create towers, x, y, DMG, ROF
+		Towers.createTower(100, 300, 10, 50);
+		Towers.createTower(400, 300, 10, 50);
 	
 		
 	}
@@ -242,7 +243,10 @@ public class Test extends BasicGameState {
 		//	this.game.enterState(1);
 		//if troop 0 is within range of tower1 0
 		for(int i=0;i<Towers.Nturrets;i++){
-			Towers.turrets[i].hasShot = false;
+			//if tower animation for shooting should not be painted
+			if(40<Player.updateTime-Towers.turrets[i].lastShot){
+				Towers.turrets[i].hasShot = false;			
+			}
 			for(int ii=0; ii<Troops.NTroops;ii++){
 				//debug message, what tower and troop is being checked
 				//if troop is within range of a tower.

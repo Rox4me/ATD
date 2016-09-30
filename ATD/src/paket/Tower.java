@@ -6,7 +6,7 @@ public class Tower {
 	//Rate Of Fire
 	private int ROF;
 	//Last time it shot
-	private long lastShot;
+	public long lastShot;
 	//DaMaGe
 	private int DMG;
 	//coordinates
@@ -24,13 +24,15 @@ public class Tower {
 		this.x=x;
 		this.y=y;
 		this.DMG=DMG;
-		this.ROF=ROF * 1;
+		this.ROF=ROF;
 		this.lastShot=Player.updateTime;
 		range = new Circle(this.x, this.y, 100);
 	}
 	//Shooting troops in range
 	public void shootTroop(Troop T, int i){
 		if(ROF<Player.updateTime-lastShot){
+			System.out.println(Player.updateTime-lastShot);
+			//if true paint shot(laser)
 			this.hasShot = true;
 			lastShot=Player.updateTime;
 			//reduce troop health
@@ -52,6 +54,7 @@ public class Tower {
 		float yDistance = T.positionY + (T.troopHeight/2) - this.y;
 		this.aimingAt = Math.toDegrees(Math.atan2(yDistance, xDistance));
 				
+
 	}
 
 }
