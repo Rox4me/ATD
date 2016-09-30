@@ -29,6 +29,7 @@ public class Map2 extends BasicGameState {
 	Image towerTurret;
 	Image towerTurretLaser;
 	Image unitMenu;
+	Image level2;
 
 	//hitboxes to change direction troops move in
 	Rectangle[] corners = new Rectangle[8];
@@ -70,6 +71,8 @@ public class Map2 extends BasicGameState {
 		towerTurret = new Image("textures/enemytop.png");
 		towerTurretLaser = new Image("textures/enemytoplaser.png");
 		unitMenu = new Image("textures/playmenystruktur.png");
+		level2 = new Image("textures/level2.png");
+				
 		Troops.NTroops = 0;
 		Towers.Nturrets = 0;
 		Player.credit = Startcredit;
@@ -116,6 +119,7 @@ public class Map2 extends BasicGameState {
 		//draw background
 		g.drawImage(background, 0,0);
 		g.drawImage(unitMenu, 200, 660);
+		g.drawImage(level2, 524, 713);
 		//draw troops
 		for(int i=0;i<Troops.NTroops;i++){
 				g.drawImage(troopImages[Troops.troops[i].troopImage - 1 + Troops.troops[i].whichWay], Troops.troops[i].positionX, Troops.troops[i].positionY);

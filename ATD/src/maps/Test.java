@@ -28,6 +28,9 @@ public class Test extends BasicGameState {
 	Image towerTurret;
 	Image towerTurretLaser;
 	Image unitMenu;
+	Image level1;
+
+	
 	private int Startcredit = 10000;
 	long lastSpawn;
 	
@@ -52,6 +55,7 @@ public class Test extends BasicGameState {
 		towerTurret = new Image("textures/enemytop.png");
 		towerTurretLaser = new Image("textures/enemytoplaser.png");
 		unitMenu = new Image("textures/playmenystruktur.png");
+		level1 = new Image("textures/level1.png");
 		Troops.NTroops = 0;
 		Towers.Nturrets = 0;
 		Player.credit = Startcredit;
@@ -78,7 +82,7 @@ public class Test extends BasicGameState {
 		//draw background
 		g.drawImage(background, 0,0);
 		g.drawImage(unitMenu, 200, 660);
-		//draw troops
+		g.drawImage(level1, 524, 713);
 		for(int i=0;i<Troops.NTroops;i++){
 				g.drawImage(troopImages[Troops.troops[i].troopImage], Troops.troops[i].positionX, Troops.troops[i].positionY);
 				if(Troops.troops[i].troopImage>3 && Troops.troops[i].troopImage < 8){
